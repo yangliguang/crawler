@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+   <!-- MySql所对应的jar包 -->
+    <classPathEntry location="F:\work\WOSCrawler\WOS\lib\mysql-connector-java-5.1.13-bin.jar" />
+    <context id="MysqlTables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <!-- 避免生成注解 -->
+			<property name="suppressAllComments" value="true" /> 
+        </commentGenerator>
+		<!-- jdbc连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+            connectionURL="jdbc:mysql://127.0.0.1:3306/woscrawler" 
+            userId="root"
+            password="password22!" />
+        
+        <!-- javaBean -->
+        <javaModelGenerator targetPackage="entity"
+            targetProject="F:\work\WOSCrawler\src" />
+            
+        <!-- Mapper.xml -->
+        <sqlMapGenerator targetPackage="dao"
+            targetProject="F:\work\WOSCrawler\src">
+            <property name="enableSubPackages" value="true" />
+            
+        </sqlMapGenerator>
+        <!-- 接口生成 -->
+        <javaClientGenerator targetPackage="dao"
+            targetProject="F:\work\WOSCrawler\src" type="XMLMAPPER" />
+            
+        <table tableName="coreresult" domainObjectName="CoreResult"></table>
+    </context>
+</generatorConfiguration>

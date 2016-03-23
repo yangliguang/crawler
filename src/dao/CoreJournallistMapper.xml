@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.CoreJournallistMapper" >
+  <resultMap id="BaseResultMap" type="entity.CoreJournallist" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="issn" property="issn" jdbcType="VARCHAR" />
+    <result column="frequency" property="frequency" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, issn, frequency, date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="entity.CoreJournallistExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from corejournallist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from corejournallist
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from corejournallist
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="entity.CoreJournallistExample" >
+    delete from corejournallist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="entity.CoreJournallist" >
+    insert into corejournallist (id, name, issn, 
+      frequency, date)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{issn,jdbcType=VARCHAR}, 
+      #{frequency,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.CoreJournallist" >
+    insert into corejournallist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="issn != null" >
+        issn,
+      </if>
+      <if test="frequency != null" >
+        frequency,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="issn != null" >
+        #{issn,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null" >
+        #{frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="entity.CoreJournallistExample" resultType="java.lang.Integer" >
+    select count(*) from corejournallist
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update corejournallist
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issn != null" >
+        issn = #{record.issn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.frequency != null" >
+        frequency = #{record.frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update corejournallist
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      issn = #{record.issn,jdbcType=VARCHAR},
+      frequency = #{record.frequency,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.CoreJournallist" >
+    update corejournallist
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="issn != null" >
+        issn = #{issn,jdbcType=VARCHAR},
+      </if>
+      <if test="frequency != null" >
+        frequency = #{frequency,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.CoreJournallist" >
+    update corejournallist
+    set name = #{name,jdbcType=VARCHAR},
+      issn = #{issn,jdbcType=VARCHAR},
+      frequency = #{frequency,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getCountByWord" parameterType="java.util.Map" resultType="java.lang.Integer">
+  	select count(*) from corejournallist where name like #{word};
+  </select>
+  
+  <!-- 	select * from corejournallist where name like #{word} and state = 0  limit 1 ; -->
+  <select id="getJournalOneByOne"  parameterType="java.util.Map" resultType="entity.CoreJournallist">
+  	select * from corejournallist where name like #{word} and state != 1 and state != 400 limit 1 ;
+  </select>
+  
+  <update id="updateStateByName" parameterType="entity.CoreJournallist" >
+  	update corejournallist set state = 1 where name = #{name}
+  </update>
+  
+  <update id="updateStateTo500" parameterType="entity.CoreJournallist" >
+  	update corejournallist set state = 400 where name = #{name}
+  </update>
+  
+  <update id="updateStateTo200" parameterType="entity.CoreJournallist" >
+  	update corejournallist set state = 400 where name = #{name}
+  </update>
+  
+  <update id="updateStateTo300" parameterType="entity.CoreJournallist" >
+  	update corejournallist set state = 400 where name = #{name}
+  </update>
+  
+  <update id="updateStateTo400" parameterType="entity.CoreJournallist" >
+  	update corejournallist set state = 400 where name = #{name}
+  </update>
+</mapper>
